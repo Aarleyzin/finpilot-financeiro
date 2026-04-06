@@ -1,6 +1,24 @@
 ﻿# FinPilot Financeiro
 
-Plataforma de gestão financeira com dashboard, controle de receitas e despesas, metas, limites e análise inteligente de gastos.
+Plataforma de gestão financeira para organizar receitas, despesas, metas e limites em um dashboard visual, simples e profissional.
+
+## Destaques
+
+- autenticação de usuário com sessão persistida
+- CRUD de receitas, despesas, categorias e limites mensais
+- dashboard com visão consolidada de saldo, entradas e saídas
+- base pronta para recorrências, metas e análises inteligentes
+- arquitetura separada entre frontend, API e camada compartilhada
+
+## Preview
+
+O FinPilot Financeiro foi pensado para apresentar no portfólio uma aplicação com cara de produto real:
+
+- tela de login e cadastro
+- painel com resumo financeiro e gráficos
+- formulário para movimentações
+- gestão de categorias
+- gestão de limites por mês
 
 ## Estrutura
 
@@ -35,6 +53,10 @@ finpilot-financeiro/
 - Gráficos: Recharts
 - Deploy: Vercel + Railway/Render
 
+## Link do repositório
+
+- [GitHub privado](https://github.com/Aarleyzin/finpilot-financeiro)
+
 ## Como rodar
 
 1. Copie `.env.example` para `.env` e preencha `JWT_SECRET`.
@@ -46,6 +68,13 @@ pnpm db:generate
 pnpm db:migrate
 pnpm dev
 ```
+
+## Próximos passos
+
+- adicionar seed com dados de exemplo
+- publicar frontend e API em ambiente online
+- incluir screenshots do dashboard no README
+- evoluir para PostgreSQL em produção
 
 ## Observação
 
