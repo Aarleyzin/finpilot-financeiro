@@ -57,7 +57,7 @@ finpilot-financeiro/
 
 ## Link do repositório
 
-- [GitHub privado](https://github.com/Aarleyzin/finpilot-financeiro)
+- [GitHub público](https://github.com/Aarleyzin/finpilot-financeiro)
 
 ## Como rodar
 
