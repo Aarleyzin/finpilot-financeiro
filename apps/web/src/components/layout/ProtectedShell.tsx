@@ -1,8 +1,7 @@
-import { NavLink, Outlet } from "react-router-dom";
+﻿import { NavLink, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 
-const linkBase =
-  "rounded-full px-4 py-2 text-sm font-medium transition-colors";
+const linkBase = "rounded-full px-4 py-2 text-sm font-medium transition-colors";
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   `${linkBase} ${
@@ -53,4 +52,3 @@ export function ProtectedShell() {
     </div>
   );
 }
-

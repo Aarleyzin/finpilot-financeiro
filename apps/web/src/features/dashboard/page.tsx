@@ -1,4 +1,4 @@
-import {
+﻿import {
   Bar,
   BarChart,
   CartesianGrid,
@@ -44,7 +44,7 @@ const insights = [
   {
     title: "Gastos variáveis",
     value: "R$ 2.680",
-    detail: "Redução de 8% vs. mês anterior",
+    detail: "Redução de 8% em relação ao mês anterior",
   },
 ];
 

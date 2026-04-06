@@ -7,6 +7,7 @@ Plataforma de gestão financeira para organizar receitas, despesas, metas e limi
 - autenticação de usuário com sessão persistida
 - CRUD de receitas, despesas, categorias e limites mensais
 - dashboard com visão consolidada de saldo, entradas e saídas
+- landing page pensada para apresentação em portfólio
 - base pronta para recorrências, metas e análises inteligentes
 - arquitetura separada entre frontend, API e camada compartilhada
 
@@ -14,6 +15,7 @@ Plataforma de gestão financeira para organizar receitas, despesas, metas e limi
 
 O FinPilot Financeiro foi pensado para apresentar no portfólio uma aplicação com cara de produto real:
 
+- landing page com proposta clara do projeto
 - tela de login e cadastro
 - painel com resumo financeiro e gráficos
 - formulário para movimentações
@@ -66,15 +68,33 @@ finpilot-financeiro/
 pnpm install
 pnpm db:generate
 pnpm db:migrate
+pnpm db:seed
 pnpm dev
 ```
 
+## Conta demo
+
+- E-mail: `ana@finpilot.com`
+- Senha: `123456`
+
+## Capturas sugeridas
+
+Se você quiser adicionar imagens no GitHub ou no LinkedIn, os melhores prints são:
+
+- `/` com a landing page
+- `/login`
+- `/register`
+- `/dashboard`
+- `/transactions`
+- `/categories`
+- `/budgets`
+
 ## Próximos passos
 
-- adicionar seed com dados de exemplo
 - publicar frontend e API em ambiente online
 - incluir screenshots do dashboard no README
 - evoluir para PostgreSQL em produção
+- adicionar seed com cenários extras para demonstração
 
 ## Observação
 

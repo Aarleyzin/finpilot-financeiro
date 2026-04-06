@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+﻿import { useEffect, useState, type FormEvent } from "react";
 import { apiRequest } from "../../lib/api";
 import { useAuth } from "../../context/auth";
 import { Card } from "../../components/ui/Card";
@@ -211,7 +211,7 @@ export function TransactionsPage() {
                   <div>
                     <p className="font-medium text-slate-950">{transaction.title}</p>
                     <p className="text-sm text-slate-500">
-                      {transaction.categoryName ?? "Sem categoria"} •{" "}
+                      {transaction.categoryName ?? "Sem categoria"} • {" "}
                       {new Date(transaction.occurredAt).toLocaleDateString("pt-BR")}
                     </p>
                   </div>

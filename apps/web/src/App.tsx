@@ -1,9 +1,10 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+﻿import { Navigate, Route, Routes } from "react-router-dom";
 import { ProtectedShell } from "./components/layout/ProtectedShell";
 import { PublicShell } from "./components/layout/PublicShell";
 import { RequireAuth } from "./components/RequireAuth";
 import { LoginPage } from "./features/auth/login-page";
 import { RegisterPage } from "./features/auth/register-page";
+import { HomePage } from "./features/home/page";
 import { DashboardPage } from "./features/dashboard/page";
 import { TransactionsPage } from "./features/transactions/page";
 import { CategoriesPage } from "./features/categories/page";
@@ -12,6 +13,7 @@ import { BudgetsPage } from "./features/budgets/page";
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<HomePage />} />
       <Route
         path="/login"
         element={
@@ -41,7 +43,7 @@ export default function App() {
         <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/budgets" element={<BudgetsPage />} />
       </Route>
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
