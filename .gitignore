@@ -15,3 +15,7 @@ packages/*/node_modules
 packages/*/dist
 
 prisma/dev.db
+
+*.tsbuildinfo
+apps/api/prisma/dev.db
+
