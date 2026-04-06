@@ -19,3 +19,10 @@ prisma/dev.db
 *.tsbuildinfo
 apps/api/prisma/dev.db
 
+# Local-only artifacts (não versionar)
+apps/api/prisma/*.bak
+apps/api/schema-engine-*.exe
+apps/api/prisma.config.ts
+apps/api/prisma/seed-data.json
+apps/api/prisma/seed-manual.sql
+apps/api/scripts/manual-seed.cjs
