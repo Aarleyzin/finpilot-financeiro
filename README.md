@@ -72,34 +72,4 @@ pnpm db:seed
 pnpm dev
 ```
 
-## Conta demo
 
-- E-mail: `ana@finpilot.com`
-- Senha: `123456`
-
-## Capturas sugeridas
-
-Se você quiser adicionar imagens no GitHub ou no LinkedIn, os melhores prints são:
-
-- `/` com a landing page
-- `/login`
-- `/register`
-- `/dashboard`
-- `/transactions`
-- `/categories`
-- `/budgets`
-
-## Próximos passos
-
-- publicar frontend e API em ambiente online
-- incluir screenshots do dashboard no README
-- evoluir para PostgreSQL em produção
-- adicionar seed com cenários extras para demonstração
-
-## Observação
-
-O dashboard inicial usa dados mockados na interface, enquanto as telas de
-receitas, despesas, categorias e limites já conversam com a API real.
-
-Para produção, você pode trocar o `DATABASE_URL` para PostgreSQL mais tarde
-sem alterar a camada de domínio.
