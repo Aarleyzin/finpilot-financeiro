@@ -1,0 +1,17 @@
+node_modules
+dist
+build
+.turbo
+.next
+coverage
+.env
+.env.*
+!.env.example
+*.log
+
+apps/*/node_modules
+apps/*/dist
+packages/*/node_modules
+packages/*/dist
+
+prisma/dev.db
