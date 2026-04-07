@@ -13,5 +13,10 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
+// Health under /api for hosts que usam prefixo
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok" });
+});
+
 app.use("/api", apiRouter);
 app.use(errorHandler);
