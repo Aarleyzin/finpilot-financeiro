@@ -26,3 +26,5 @@ apps/api/prisma.config.ts
 apps/api/prisma/seed-data.json
 apps/api/prisma/seed-manual.sql
 apps/api/scripts/manual-seed.cjs
+
+.vercel
