@@ -23,6 +23,7 @@ services:
     env: static
     buildCommand: |
       corepack enable pnpm
+      echo "VITE_API_URL=${VITE_API_URL}" > apps/web/.env.production
       pnpm install --frozen-lockfile
       pnpm --filter @finpilot/web build
     staticPublishPath: apps/web/dist
