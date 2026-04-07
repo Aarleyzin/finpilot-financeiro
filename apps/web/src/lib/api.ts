@@ -1,8 +1,7 @@
-const API_URL =
-  import.meta.env.VITE_API_URL ||
-  (import.meta.env.PROD
-    ? "https://finpilot-api-t70s.onrender.com/api"
-    : "http://localhost:3333");
+// Hardcode produção para evitar builds com env faltando
+const API_URL = import.meta.env.DEV
+  ? (import.meta.env.VITE_API_URL ?? "http://localhost:3333")
+  : "https://finpilot-api-t70s.onrender.com/api";
 
 export class ApiError extends Error {
   status: number;
