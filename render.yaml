@@ -29,4 +29,4 @@ services:
     staticPublishPath: apps/web/dist
     envVars:
       - key: VITE_API_URL
-        value: https://finpilot-api.onrender.com/api
+        value: https://finpilot-api-t70s.onrender.com/api
