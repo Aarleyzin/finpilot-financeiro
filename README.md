@@ -53,7 +53,7 @@ finpilot-financeiro/
 - Banco: Prisma com SQLite no desenvolvimento
 - Auth: JWT
 - Gráficos: Recharts
-- Deploy: Vercel + Railway/Render
+- Deploy: auto-hospedagem (Render/Railway/Fly/etc.)
 
 ## Link do repositório
 
@@ -95,20 +95,9 @@ Se você quiser adicionar imagens no GitHub ou no LinkedIn, os melhores prints s
 - incluir screenshots do dashboard no README
 - adicionar seed com cenários extras para demonstração e múltiplos usuários
 
-## Deploy na Vercel (monorepo)
-
-- Repositório já configurado com `vercel.json`.
-- Crie um projeto na Vercel apontando para a raiz do repo; framework Vite é detectado.
-- Variáveis de ambiente obrigatórias:
-  - `VITE_API_URL=https://<seu-projeto>.vercel.app/api`
-  - `DATABASE_URL` (PostgreSQL; use Neon/Supabase/Vercel Postgres)
-  - `JWT_SECRET` (chave longa e secreta)
-- Build executa `pnpm --filter @finpilot/api prisma generate`, `pnpm --filter @finpilot/api prisma db push` e `pnpm --filter @finpilot/web build`.
-- A API roda em função serverless em `/api`, consumindo o mesmo domínio do front.
-
 ## Observação
 
-O dashboard inicial usa dados mockados na interface, enquanto as telas de
+O dashboard inicial usa alguns dados mockados na interface, enquanto as telas de
 receitas, despesas, categorias e limites já conversam com a API real.
 
-Para produção, mantenha o `DATABASE_URL` apontando para PostgreSQL (SQLite não é suportado em ambiente serverless).
+Para produção, use PostgreSQL no `DATABASE_URL` (SQLite é apenas para desenvolvimento local).
