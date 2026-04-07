@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: finpilot-api
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: |
+      corepack enable pnpm
+      pnpm install --frozen-lockfile
+      pnpm --filter @finpilot/api prisma generate
+      pnpm --filter @finpilot/api prisma migrate deploy
+      pnpm --filter @finpilot/api build
+    startCommand: pnpm --filter @finpilot/api start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+    healthCheckPath: /health
+
+  - type: static
+    name: finpilot-web
+    buildCommand: |
+      corepack enable pnpm
+      pnpm install --frozen-lockfile
+      pnpm --filter @finpilot/web build
+    publishPath: apps/web/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://finpilot-api.onrender.com/api

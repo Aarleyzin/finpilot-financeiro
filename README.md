@@ -101,3 +101,13 @@ O dashboard inicial usa alguns dados mockados na interface, enquanto as telas de
 receitas, despesas, categorias e limites já conversam com a API real.
 
 Para produção, use PostgreSQL no `DATABASE_URL` (SQLite é apenas para desenvolvimento local).
+
+## Deploy no Render (infra como código)
+
+- Arquivo `render.yaml` pronto com dois serviços:
+  - `finpilot-api` (web service Node): usa `DATABASE_URL` (Postgres) e `JWT_SECRET`.
+  - `finpilot-web` (static): publica `apps/web/dist` e lê `VITE_API_URL` (padrão aponta para `https://finpilot-api.onrender.com/api`).
+- Passos:
+  1. No Render, “New +” → “Blueprint” → aponte para este repositório.
+  2. Defina as envs `DATABASE_URL` e `JWT_SECRET` no serviço `finpilot-api`.
+  3. Deploy; o front já sairá apontando para o host da API (ajuste `VITE_API_URL` se necessário).
