@@ -5,10 +5,8 @@
   "outputDirectory": "apps/web/dist",
   "functions": {
     "api/index.ts": {
-      "includeFiles": [
-        "apps/api/prisma/schema.prisma",
-        "apps/api/prisma/migrations/**"
-      ]
+      "runtime": "nodejs20.x",
+      "includeFiles": "apps/api/prisma/**"
     }
   },
   "env": {
