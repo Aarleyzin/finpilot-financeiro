@@ -21,8 +21,6 @@ services:
   - type: web
     name: finpilot-web
     env: static
-    plan: free
-    region: oregon
     buildCommand: |
       corepack enable pnpm
       pnpm install --frozen-lockfile
