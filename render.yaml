@@ -18,13 +18,16 @@ services:
         sync: false
     healthCheckPath: /health
 
-staticSites:
-  - name: finpilot-web
+  - type: web
+    name: finpilot-web
+    env: static
+    plan: free
+    region: oregon
     buildCommand: |
       corepack enable pnpm
       pnpm install --frozen-lockfile
       pnpm --filter @finpilot/web build
-    publishPath: apps/web/dist
+    staticPublishPath: apps/web/dist
     envVars:
       - key: VITE_API_URL
         value: https://finpilot-api.onrender.com/api
