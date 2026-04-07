@@ -1,0 +1,17 @@
+{
+  "framework": "vite",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm --filter @finpilot/api prisma generate && pnpm --filter @finpilot/api prisma db push && pnpm --filter @finpilot/web build",
+  "outputDirectory": "apps/web/dist",
+  "functions": {
+    "api/index.ts": {
+      "includeFiles": [
+        "apps/api/prisma/schema.prisma",
+        "apps/api/prisma/migrations/**"
+      ]
+    }
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

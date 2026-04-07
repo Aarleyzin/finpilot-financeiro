@@ -1,12 +1,7 @@
-ï»¿import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
 import { PrismaClient, TransactionKind } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 function currentMonthStart() {
   const now = new Date();
@@ -18,26 +13,10 @@ function atDay(base: Date, day: number, hour = 12) {
 }
 
 async function ensureSchema() {
-  // Evita reaplicar a migration quando o banco jÃ¡ existe (impede erros "table already exists")
-  const [{ tableCount }] = (await prisma.$queryRawUnsafe<
-    { tableCount: number }[]
-  >(
-    `SELECT COUNT(*) AS tableCount FROM sqlite_master WHERE type = 'table' AND name = 'User';`,
-  ));
-
-  if (tableCount > 0) {
-    return;
-  }
-
-  // Executa a migration SQL diretamente apenas em ambientes bloqueados sem schema-engine
-  const migrationPath = path.resolve(
-    __dirname,
-    "migrations",
-    "20260403225116_pnpm_dev",
-    "migration.sql",
-  );
-  const sql = fs.readFileSync(migrationPath, "utf8");
-  await prisma.$executeRawUnsafe(sql);
+  // Em produção usamos `prisma db push` na pipeline (ver vercel.json),
+  // então o schema já estará criado. Aqui não fazemos nada para evitar
+  // dependência de arquivos locais ou PRAGMA específicos de SQLite.
+  return;
 }
 
 async function main() {
@@ -66,7 +45,7 @@ async function main() {
     salary: await prisma.category.create({
       data: {
         userId: user.id,
-        name: "SalÃ¡rio",
+        name: "Salário",
         kind: TransactionKind.INCOME,
         color: "#0f766e",
       },
@@ -90,7 +69,7 @@ async function main() {
     food: await prisma.category.create({
       data: {
         userId: user.id,
-        name: "AlimentaÃ§Ã£o",
+        name: "Alimentação",
         kind: TransactionKind.EXPENSE,
         color: "#f59e0b",
       },
@@ -161,11 +140,11 @@ async function main() {
       {
         userId: user.id,
         categoryId: categories.salary.id,
-        title: "SalÃ¡rio CLT",
+        title: "Salário CLT",
         amount: 9200,
         kind: TransactionKind.INCOME,
         occurredAt: atDay(now, 5),
-        notes: "Recebimento principal do mÃªs.",
+        notes: "Recebimento principal do mês.",
       },
       {
         userId: user.id,
@@ -183,7 +162,7 @@ async function main() {
         amount: 2800,
         kind: TransactionKind.EXPENSE,
         occurredAt: atDay(now, 6),
-        notes: "Pagamento do mÃªs vigente.",
+        notes: "Pagamento do mês vigente.",
       },
       {
         userId: user.id,
@@ -192,7 +171,7 @@ async function main() {
         amount: 640,
         kind: TransactionKind.EXPENSE,
         occurredAt: atDay(now, 10),
-        notes: "Compras de casa e reposiÃ§Ã£o.",
+        notes: "Compras de casa e reposição.",
       },
       {
         userId: user.id,
@@ -219,7 +198,7 @@ async function main() {
         amount: 214,
         kind: TransactionKind.EXPENSE,
         occurredAt: atDay(now, 21),
-        notes: "SaÃ­da do fim de semana.",
+        notes: "Saída do fim de semana.",
       },
       {
         userId: user.id,
@@ -228,7 +207,7 @@ async function main() {
         amount: 48,
         kind: TransactionKind.EXPENSE,
         occurredAt: atDay(now, 24),
-        notes: "CafÃ© e lanches.",
+        notes: "Café e lanches.",
       },
     ],
   });

@@ -4,6 +4,7 @@ import { apiRouter } from "./routes/index.js";
 import { errorHandler } from "./middlewares/error-handler.js";
 
 export const app = express();
+export default app;
 
 app.use(cors());
 app.use(express.json());
