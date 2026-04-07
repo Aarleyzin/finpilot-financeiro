@@ -18,8 +18,8 @@ services:
         sync: false
     healthCheckPath: /health
 
-  - type: static_site
-    name: finpilot-web
+staticSites:
+  - name: finpilot-web
     buildCommand: |
       corepack enable pnpm
       pnpm install --frozen-lockfile
