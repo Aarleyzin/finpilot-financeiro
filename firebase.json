@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "finpilot-financeiro",
+    "public": "apps/web/dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
