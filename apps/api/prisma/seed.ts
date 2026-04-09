@@ -1,4 +1,4 @@
-import { PrismaClient, TransactionKind } from "@prisma/client";
+ï»¿import { PrismaClient, TransactionKind } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -13,28 +13,26 @@ function atDay(base: Date, day: number, hour = 12) {
 }
 
 async function ensureSchema() {
-  // Em produção usamos `prisma db push` na pipeline (ver vercel.json),
-  // então o schema já estará criado. Aqui não fazemos nada para evitar
-  // dependência de arquivos locais ou PRAGMA específicos de SQLite.
+  // Em produÃ§Ã£o usamos `prisma migrate deploy` na pipeline,
+  // entÃ£o o schema jÃ¡ estarÃ¡ criado. Aqui nÃ£o fazemos nada.
   return;
 }
 
-async function main() {
-  await ensureSchema();
-
-  const passwordHash = await bcrypt.hash("123456", 10);
+async function seedDemoUser({
+  email,
+  name,
+  password,
+}: {
+  email: string;
+  name: string;
+  password: string;
+}) {
+  const passwordHash = await bcrypt.hash(password, 10);
 
   const user = await prisma.user.upsert({
-    where: { email: "ana@finpilot.com" },
-    update: {
-      name: "Ana Pereira",
-      passwordHash,
-    },
-    create: {
-      name: "Ana Pereira",
-      email: "ana@finpilot.com",
-      passwordHash,
-    },
+    where: { email },
+    update: { name, passwordHash },
+    create: { name, email, passwordHash },
   });
 
   await prisma.transaction.deleteMany({ where: { userId: user.id } });
@@ -43,60 +41,25 @@ async function main() {
 
   const categories = {
     salary: await prisma.category.create({
-      data: {
-        userId: user.id,
-        name: "Salário",
-        kind: TransactionKind.INCOME,
-        color: "#0f766e",
-      },
+      data: { userId: user.id, name: "SalÃ¡rio", kind: TransactionKind.INCOME, color: "#0f766e" },
     }),
     freelance: await prisma.category.create({
-      data: {
-        userId: user.id,
-        name: "Freela",
-        kind: TransactionKind.INCOME,
-        color: "#14b8a6",
-      },
+      data: { userId: user.id, name: "Freela", kind: TransactionKind.INCOME, color: "#14b8a6" },
     }),
     home: await prisma.category.create({
-      data: {
-        userId: user.id,
-        name: "Moradia",
-        kind: TransactionKind.EXPENSE,
-        color: "#0f172a",
-      },
+      data: { userId: user.id, name: "Moradia", kind: TransactionKind.EXPENSE, color: "#0f172a" },
     }),
     food: await prisma.category.create({
-      data: {
-        userId: user.id,
-        name: "Alimentação",
-        kind: TransactionKind.EXPENSE,
-        color: "#f59e0b",
-      },
+      data: { userId: user.id, name: "AlimentaÃ§Ã£o", kind: TransactionKind.EXPENSE, color: "#f59e0b" },
     }),
     transport: await prisma.category.create({
-      data: {
-        userId: user.id,
-        name: "Transporte",
-        kind: TransactionKind.EXPENSE,
-        color: "#38bdf8",
-      },
+      data: { userId: user.id, name: "Transporte", kind: TransactionKind.EXPENSE, color: "#38bdf8" },
     }),
     subscriptions: await prisma.category.create({
-      data: {
-        userId: user.id,
-        name: "Assinaturas",
-        kind: TransactionKind.EXPENSE,
-        color: "#8b5cf6",
-      },
+      data: { userId: user.id, name: "Assinaturas", kind: TransactionKind.EXPENSE, color: "#8b5cf6" },
     }),
     leisure: await prisma.category.create({
-      data: {
-        userId: user.id,
-        name: "Lazer",
-        kind: TransactionKind.EXPENSE,
-        color: "#ef4444",
-      },
+      data: { userId: user.id, name: "Lazer", kind: TransactionKind.EXPENSE, color: "#ef4444" },
     }),
   } as const;
 
@@ -104,34 +67,10 @@ async function main() {
 
   await prisma.monthlyLimit.createMany({
     data: [
-      {
-        userId: user.id,
-        categoryId: categories.home.id,
-        month: now.getMonth() + 1,
-        year: now.getFullYear(),
-        limitAmount: 2800,
-      },
-      {
-        userId: user.id,
-        categoryId: categories.food.id,
-        month: now.getMonth() + 1,
-        year: now.getFullYear(),
-        limitAmount: 1200,
-      },
-      {
-        userId: user.id,
-        categoryId: categories.transport.id,
-        month: now.getMonth() + 1,
-        year: now.getFullYear(),
-        limitAmount: 700,
-      },
-      {
-        userId: user.id,
-        categoryId: categories.subscriptions.id,
-        month: now.getMonth() + 1,
-        year: now.getFullYear(),
-        limitAmount: 240,
-      },
+      { userId: user.id, categoryId: categories.home.id, month: now.getMonth() + 1, year: now.getFullYear(), limitAmount: 2800 },
+      { userId: user.id, categoryId: categories.food.id, month: now.getMonth() + 1, year: now.getFullYear(), limitAmount: 1200 },
+      { userId: user.id, categoryId: categories.transport.id, month: now.getMonth() + 1, year: now.getFullYear(), limitAmount: 700 },
+      { userId: user.id, categoryId: categories.subscriptions.id, month: now.getMonth() + 1, year: now.getFullYear(), limitAmount: 240 },
     ],
   });
 
@@ -140,11 +79,11 @@ async function main() {
       {
         userId: user.id,
         categoryId: categories.salary.id,
-        title: "Salário CLT",
+        title: "SalÃ¡rio CLT",
         amount: 9200,
         kind: TransactionKind.INCOME,
         occurredAt: atDay(now, 5),
-        notes: "Recebimento principal do mês.",
+        notes: "Recebimento principal do mÃªs.",
       },
       {
         userId: user.id,
@@ -162,7 +101,7 @@ async function main() {
         amount: 2800,
         kind: TransactionKind.EXPENSE,
         occurredAt: atDay(now, 6),
-        notes: "Pagamento do mês vigente.",
+        notes: "Pagamento do mÃªs vigente.",
       },
       {
         userId: user.id,
@@ -171,7 +110,7 @@ async function main() {
         amount: 640,
         kind: TransactionKind.EXPENSE,
         occurredAt: atDay(now, 10),
-        notes: "Compras de casa e reposição.",
+        notes: "Compras de casa e reposiÃ§Ã£o.",
       },
       {
         userId: user.id,
@@ -198,7 +137,7 @@ async function main() {
         amount: 214,
         kind: TransactionKind.EXPENSE,
         occurredAt: atDay(now, 21),
-        notes: "Saída do fim de semana.",
+        notes: "SaÃ­da do fim de semana.",
       },
       {
         userId: user.id,
@@ -207,12 +146,19 @@ async function main() {
         amount: 48,
         kind: TransactionKind.EXPENSE,
         occurredAt: atDay(now, 24),
-        notes: "Café e lanches.",
+        notes: "CafÃ© e lanches.",
       },
     ],
   });
 
-  console.log("Seed executado com sucesso para ana@finpilot.com / 123456");
+  console.log(`Seed executado com sucesso para ${email}`);
+}
+
+async function main() {
+  await ensureSchema();
+
+  await seedDemoUser({ email: "ana@finpilot.com", name: "Ana Pereira", password: "123456" });
+  await seedDemoUser({ email: "arlindo@finpilot.com", name: "Arlindo Silva", password: "258012" });
 }
 
 main()

@@ -67,7 +67,7 @@ finpilot-financeiro/
 ```bash
 pnpm install
 pnpm db:generate
-pnpm db:push
+pnpm db:migrate        # ou pnpm db:push para ambiente local sem histórico
 pnpm db:seed
 pnpm dev
 ```
@@ -106,7 +106,7 @@ Para produção, use PostgreSQL no `DATABASE_URL` (SQLite é apenas para desenvo
 
 - Arquivo `render.yaml` pronto com dois serviços:
   - `finpilot-api` (web service Node): usa `DATABASE_URL` (Postgres) e `JWT_SECRET`.
-  - `finpilot-web` (static): publica `apps/web/dist` e lê `VITE_API_URL` (padrão aponta para `https://finpilot-api.onrender.com/api`).
+  - `finpilot-web` (static): publica `apps/web/dist` e lê `VITE_API_URL` (padrão aponta para `https://finpilot-api-ng5i.onrender.com`).
 - Passos:
   1. No Render, “New +” → “Blueprint” → aponte para este repositório.
   2. Defina as envs `DATABASE_URL` e `JWT_SECRET` no serviço `finpilot-api`.
